@@ -1,0 +1,1 @@
+# Freedesktop .desktop application parser
