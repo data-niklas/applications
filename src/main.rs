@@ -40,10 +40,13 @@ fn parse_desktop_entry(path: PathBuf) -> HashMap<String, String>{
                 continue;
             }
             else{
-                let mut pair = line.split('=');
-                let key = pair.next().expect("Expected a key").trim();
-                let value = pair.next().expect("Expected a value").trim();
-                app.insert(key.to_owned(), value.to_owned());
+                let mut parts: Vec<&str> = line.split('=').collect();
+                if parts.len() > 0{
+                    let key = parts[0].trim();
+                    parts.remove(0);
+                    let value = parts.join("=");
+                    app.insert(key.to_owned(), value.trim().to_owned());
+                }
             }
         }
         else{
